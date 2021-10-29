@@ -1,0 +1,26 @@
+[profile lashbrook]
+region = us-west-2
+
+[profile joy.peterson_aws1-tech9-training]
+region = us-west-2
+
+[profile joy_aws2-tech9-training]
+region = us-west-2
+output = json
+
+[profile tca-s3-dev]
+region = us-west-2
+output = text
+
+[profile tca-s3-prod]
+region = us-west-2
+
+[profile tca-devops]
+region = us-west-2
+
+# [profile tech9]
+# region = us-west-2
+
+[profile tel-joy]
+region = us-west-2
+output = text
