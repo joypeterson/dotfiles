@@ -1,0 +1,247 @@
+Host *
+	ServerAliveInterval 600
+	UseKeychain yes
+	AddKeysToAgent yes
+	ForwardAgent yes
+
+# SSH over Session Manager
+host i-* mi-*
+    ProxyCommand sh -c "aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+
+# --- Sourcetree Generated ---
+Host bitbucket.org
+	HostName bitbucket.org
+	User joy_peterson
+	PreferredAuthentications publickey
+	IdentityFile /Users/joypeterson/.ssh/joy_peterson-Bitbucket
+# ----------------------------
+
+# ---------- Teleport
+Host teleport
+HostName 54.148.44.244
+User ec2-user
+IdentitiesOnly yes
+IdentityFile ~/.ssh/teleport.pem
+LocalForward 55432 teleport.cluster-ccrac5obgeyn.us-west-2.rds.amazonaws.com:5432
+
+Host teleport-prod
+HostName 54.148.44.244
+User ec2-user
+IdentitiesOnly yes
+IdentityFile ~/.ssh/teleport.pem
+LocalForward 55432 teleport-prod.cluster-ccrac5obgeyn.us-west-2.rds.amazonaws.com:5432
+
+
+# ---------- Gray Falkon
+
+Host gf-devops
+	Hostname 35.194.58.82
+	User joypeterson
+	IdentityFile /Users/joypeterson/.ssh/google_compute_engine
+
+# ----------  TCA
+
+# Use the landbot rsa key when SSHing as landcar
+Match user landcar
+	IdentityFile ~/.ssh/id_rsa_landbot
+
+Host tca-devops
+	HostName 172.31.15.40
+	User jpeterson
+
+# Landbot
+Host tca-landbot
+	HostName 172.31.10.93
+	User jpeterson
+
+# Migration
+Host tca-sb-migration-1
+	HostName 172.31.15.146
+	User jpeterson
+
+# Whiz
+Host tca-whiz-uat
+	HostName 172.31.15.85
+	User jpeterson
+
+Host tca-whiz-uat2
+	HostName 172.31.15.137
+	User jpeterson
+
+Host tca-whiz-uat3
+	HostName 172.31.10.199
+	User jpeterson
+
+Host tca-whiz-stage
+	HostName 172.31.30.42
+	User jpeterson
+
+Host tca-whiz-prod-1
+	HostName 172.31.30.77
+	User jpeterson
+
+Host tca-whiz-prod-2
+	HostName 172.31.10.56
+	User jpeterson
+
+Host tca-whiz-prod-01
+	HostName 172.31.30.249
+	User jpeterson
+	# Use the landbot rsa key when SSHing as landcar
+	# Match user landcar
+	# 	IdentityFile ~/.ssh/id_rsa_landbot
+
+Host tca-whiz-prod-02
+	HostName 172.31.10.238
+	User jpeterson
+	# Use the landbot rsa key when SSHing as landcar
+	# Match user landcar
+	# 	IdentityFile ~/.ssh/id_rsa_landbot
+
+# Phizz
+Host tca-phizz-uat
+	HostName 172.31.15.203
+	User jpeterson
+
+Host tca-phizz-uat2
+	HostName 172.31.15.143
+	User jpeterson
+
+Host tca-phizz-uat3
+	HostName 172.31.10.11
+	User jpeterson
+
+Host tca-phizz-stage-1
+	HostName 172.31.10.182
+	User jpeterson
+
+Host tca-phizz-stage-2
+	HostName 172.31.30.199
+	User jpeterson
+
+Host tca-phizz-prod-1
+	HostName 172.31.10.85
+	User jpeterson
+
+Host tca-phizz-prod-2
+	HostName 172.31.30.65
+	User jpeterson
+
+Host tca-phizz-prod-01
+	HostName 172.31.10.189
+	User jpeterson
+	# Use the landbot rsa key when SSHing as landcar
+	# Match user landcar
+	# 	IdentityFile ~/.ssh/id_rsa_landbot
+
+Host tca-phizz-prod-02
+	HostName 172.31.30.84
+	User jpeterson
+	# Use the landbot rsa key when SSHing as landcar
+	# Match user landcar
+	# 	IdentityFile ~/.ssh/id_rsa_landbot
+
+# MPA
+Host tca-mpa-uat
+	HostName 172.31.15.58
+	User jpeterson
+
+Host tca-mpa-prod-1
+	HostName 172.31.30.197
+	User jpeterson
+
+Host tca-mpa-prod-2
+	HostName 172.31.10.236
+	User jpeterson
+
+# Dealer Portal
+Host tca-dealerportal-stage-1
+	HostName 172.31.30.37
+	User jpeterson
+
+Host tca-dealerportal-stage-2
+	HostName 172.31.10.13
+	User jpeterson
+
+Host tca-dealerportal-prod-1
+	# HostName 172.31.30.101
+	HostName 172.31.30.16
+	User jpeterson
+
+Host tca-dealerportal-prod-2
+	# HostName 172.31.10.133
+	HostName 172.31.30.174
+	User jpeterson
+
+# Stampy
+Host tca-stampy-stage
+	HostName 172.31.10.117
+	User jpeterson
+
+Host tca-stampy-prod-1
+	HostName 172.31.10.112
+	User jpeterson
+
+Host tca-stampy-prod-2
+	HostName 172.31.20.188
+	User jpeterson
+
+# Unidata
+Host tca-unidata-stage
+	HostName 172.31.10.100
+	User jpeterson
+
+Host tca-unidata-prod-1
+	HostName 172.31.10.90
+	User jpeterson
+
+Host tca-unidata-prod-2
+	HostName 172.31.20.233
+	User jpeterson
+
+# Files
+Host tca-files-landcar-com
+	HostName 172.31.15.61
+	User jpeterson
+
+# TCA Admin
+Host tca-admin
+	HostName 172.31.15.159
+	User jpeterson
+
+Host tca-files-landcar-com
+	HostName 172.31.15.61
+	User jpeterson
+
+# ----------  Lashbrook
+
+Host lashbrook-proxy
+#	HostName ec2-54-191-4-79.us-west-2.compute.amazonaws.com
+	HostName ec2-54-186-203-232.us-west-2.compute.amazonaws.com
+	User ec2-user
+	IdentityFile /Users/joypeterson/.ssh/lashbrook-tech9.pem
+	# DynamicForward 8157
+	# Compression yes
+	# ControlMaster auto
+  	# ControlPath ~/.ssh/sockets/%C
+
+Host lashbrook-dev
+	HostName 45.56.91.52
+	User root
+
+Host lashbrook-stage
+	HostName 173.230.152.113
+	User root
+
+Host lashbrook-prod
+	HostName 173.230.152.253
+	User root
+
+Host lashbrook-prod-old
+	HostName 50.116.5.86
+	User root
+
+Host lashbrook-hive-master
+	HostName ec2-34-219-132-58.us-west-2.compute.amazonaws.com
+	User hadoop
+	IdentityFile /Users/joypeterson/.ssh/lashbrook-tech9.pem

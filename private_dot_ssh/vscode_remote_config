@@ -1,0 +1,14 @@
+Host *
+	ServerAliveInterval 600
+	UseKeychain yes
+	AddKeysToAgent yes
+	ForwardAgent yes
+
+# ----------  TCA
+Host tca-aws-gui
+	HostName 52.24.83.180
+	User awsgui
+
+Host tca-devops
+	HostName 172.31.15.40
+	User jpeterson
