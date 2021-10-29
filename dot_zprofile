@@ -1,11 +1,12 @@
+#--------------------------------------------------------------------------------
+# Homebrew
+#--------------------------------------------------------------------------------
+# export PATH=/usr/local/bin:/usr/local/sbin:$PATH # This was the correct path before Mac OS 12.0
+export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
+
 # Keep until pyenv oh-my-zsh plugin is fixed
 # to be compatible with latest pyenv version
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 
-#--------------------------------------------------------------------------------
-# Homebrew
-#--------------------------------------------------------------------------------
-# export PATH=/usr/local/bin:/usr/local/sbin:$PATH # This was the correct path before Mac OS 12.0
-export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH

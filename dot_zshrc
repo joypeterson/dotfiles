@@ -90,7 +90,7 @@ plugins=(
   history-substring-search
   kubectl
   osx
-  pyenv
+  # pyenv
   vscode
   yarn
 )
@@ -293,9 +293,9 @@ export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 # Python 3
 #--------------------------------------------------------------------------------
 # Not needed with pyenv
-# export PATH=/usr/local/opt/python/libexec/bin:$PATH
-# USER_BASE_PATH=$(python -m site --user-base)
-# export PATH=$PATH:$USER_BASE_PATH/bin
+export PATH=/usr/local/opt/python/libexec/bin:$PATH
+USER_BASE_PATH=$(python -m site --user-base)
+export PATH=$PATH:$USER_BASE_PATH/bin
 
 #--------------------------------------------------------------------------------
 # Python pyenv
