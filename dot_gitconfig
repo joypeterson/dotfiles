@@ -1,0 +1,112 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Joy Peterson
+	email = joy.peterson@tech9.com
+[core]
+	autocrlf = false
+	editor = code --new-window --wait
+	safecrlf = false
+	excludesfile = /Users/joypeterson/.gitignore_global
+
+[color]
+	ui = true
+
+[color "status"]
+	untracked = red normal bold
+	changed = red normal bold
+
+[alias]
+	#list all aliases
+    la = "!git config -l | grep alias | cut -c 7-"
+
+	#assume aliases - Ignoring changes to files that are managed by git.
+    assume = update-index --assume-unchanged
+    unassume = update-index --no-assume-unchanged
+    #show assumed files
+    assumed = "!git ls-files -v | grep ^h | cut -c 3-"
+	
+	#merges
+    ours = "!f() { git co --ours $@ && git add $@; }; f"
+    theirs = "!f() { git co --theirs $@ && git add $@; }; f"
+	
+	# show all tags w/ one line of annotation
+	tags=tag -l -n1
+	# last 20 tags, lexicographic sort
+	ta = "!f() { git tags $@ | tail -20; }; f"
+	
+	# See http://haacked.com/archive/2014/07/28/github-flow-aliases/
+	# and https://bitbucket.org/durdn/cfg/src/master/.gitconfig?at=master
+	
+	co = checkout
+	cob = checkout -b
+	
+	# Commit all code in current branch.
+	cm = !git add -A && git commit -m 
+	
+	# Modify the previous commit.
+	amend = commit -a --amend
+	
+	# Edit global .gitconfig file.
+	ec = config --global -e
+	
+	# Update working branch from master.
+	up = !git pull --prune $@ && git submodule update --init --recursive
+	
+	# Throw away uncommitted work, but first commit in case you realize you need it later, 
+	# then reset HEAD to before the commit. This allows the discarded work to be 
+	# retrieved later if necessary.
+	wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+		
+	# Condensed status
+	st = status -s
+	
+	# follow file renames (mnemonic: 'log file' or 'log follow')
+	lf = log --decorate --follow      
+	
+	# short log form of last 10 commits, can override 10 w/ own count ('git lo -20' works)
+	lo = log -10 --decorate                --pretty=tformat:"%ar%x09%C(blue)%an%x09%C(yellow)%h%x09%Cgreen%d%Creset%x20%s" 
+	
+	l = log -10 --decorate --no-merges     --pretty=tformat:"%ar%x09%C(blue)%an%x09%C(yellow)%h%x09%Cgreen%d%Creset%x20%s"
+	lb = log -10 --decorate --first-parent --pretty=tformat:"%ar%x09%C(blue)%an%x09%C(yellow)%h%x09%Cgreen%d%Creset%x20%s"
+	l1 = log --decorate -1
+
+	# log with branch view
+	bl=log --graph --pretty=format:'%Cred%h%Creset -%Cgreen(%cr) %C(yellow)%d%Creset %s  %C(bold blue)<%an>%Creset' --abbrev-commit
+
+	# diff HEAD-vs-working  (all changes since last commit, regardless of staging status)
+	dh = diff --diff-filter=CMRUX HEAD
+	dn = diff --name-status
+	
+	# list the files that changed in a changelist
+	changed = diff-tree --no-commit-id --name-only -r
+
+[push]
+	default = current
+
+[difftool]
+	tool = vscode
+    prompt = false
+
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+
+[difftool "vscode"]
+	cmd = 'code' --new-window --diff --wait \"$LOCAL\" \"$REMOTE\"
+
+[merge]
+    tool = vscode
+
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+
+[mergetool "vscode"]
+	cmd = 'code' --new-window --wait \"$MERGED\"
+	# cmd = 'code' --diff --wait \"$LOCAL\" \"$REMOTE\"
+
+[commit]
+	template = /Users/joypeterson/.stCommitMsg
+[pull]
+	rebase = false

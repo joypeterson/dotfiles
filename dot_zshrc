@@ -1,0 +1,420 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Use the version of PHP that was installed with homebrew
+# export PATH=/usr/local/opt/php@7.1/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH=/Users/joypeterson/.oh-my-zsh
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Switched to powerlevel10k.  Config is now in ~/.p10k.zsh
+# POWERLEVEL9K_MODE='nerdfont-complete'
+# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status dir dir_writable pyenv vcs aws gcloud)
+# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time time)
+# POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+# POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND="white"
+# POWERLEVEL9K_TIME_FORMAT="%D{%H:%M}"
+# POWERLEVEL9K_HIDE_BRANCH_ICON=true
+# POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+# POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+# POWERLEVEL9K_RPROMPT_ON_NEWLINE=false
+
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+  autoupdate
+  aws
+  brew
+  docker
+  docker-compose
+  gcloud
+  gitfast
+  golang
+  history-substring-search
+  kubectl
+  osx
+  pyenv
+  vscode
+  yarn
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+bindkey -M emacs '^[[3;5~' kill-word                        # [Ctrl-Del]
+# changes hex 0x15 to delete everything to the left of the cursor,
+# rather than the whole line
+bindkey "^U" backward-kill-line                             # [Command-Backspace]
+bindkey "^X^_" redo                                         # [Shift-Command-Z]
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='code --new-window --wait'
+fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+#--------------------------------------------------------------------------------
+# ALIASES
+#--------------------------------------------------------------------------------
+
+alias ll='ls -Aphotr'
+alias ls='ls -p'
+alias psg='ps aux | head -1;ps aux | grep -v " grep " | grep -i'
+alias egrep='egrep'
+alias f='fgrep'
+alias fgrep='fgrep'
+alias fv='fgrep -v'
+alias grep='grep'
+alias vim='nvim'
+alias vi='nvim'
+
+# Use bat instead of cat
+if [ "$(command -v bat)" ]; then
+  unalias -m 'cat'
+  alias cat='bat -pp --theme="Nord"'
+fi
+
+# Use Exa instad of ls
+if [ "$(command -v exa)" ]; then
+    unalias -m 'll'
+    unalias -m 'l'
+    unalias -m 'la'
+    unalias -m 'ls'
+    alias ls='exa -G  --color auto --icons -a -s type'
+    alias ll='exa -l --color always --icons -a -s type'
+fi
+
+#--------------------------------------------------------------------------------
+# Functions
+#--------------------------------------------------------------------------------
+
+# Reload settings from ~/.zshrc
+src() {
+    source ~/.zshrc
+}
+
+# Shows the size of folders and files, sorted from highest to lowest
+dus() {
+  du -hs * | sort -rh
+}
+
+# Edit dnsmasq configuration.
+dnsconfig() {
+  code -n /etc/resolver /usr/local/etc/dnsmasq.d/development.conf /usr/local/etc/dnsmasq.conf
+}
+
+# Restart dnsmasq
+dnsrestart() {
+  sudo brew services restart dnsmasq
+  sudo killall -HUP mDNSResponder; sleep 2; echo macOS DNS Cache Reset
+  # sudo dscacheutil -flushcache
+}
+
+httpconfig() {
+  code -n /usr/local/etc/httpd
+}
+
+zshconfig() {
+  code -n ~/.zshrc
+}
+
+# Resets the whiz DB with default data.
+# If 'full' is passed as the first argument, then contracts will be imported
+reset_whiz_db() {
+  opts=$1
+
+  pushd $GOPATH/src/whiz
+
+  # dropdb whiz
+  # createdb whiz
+  pv ~/assets/TCA/shallow_dump.sql | psql -h localhost whiz
+
+  # Load contracts
+  if [[ "$opts" == "full" ]]; then
+    pv ~/assets/TCA/contracts_dump.sql | psql -h localhost whiz
+  fi
+
+  go run cmd/dpmigrate/main.go
+
+  popd > /dev/null
+}
+
+# Builds a stand-alone phizz command and copies it to /var/devops/phizz
+# on the AWS EC2 devops instance
+phizz_devops_deploy() {
+  cmd=$1
+  cwd=$(pwd)
+  progname=${cmd##*/}
+  cd cmd/${cmd}/ && \
+    GOOS=linux GOARCH=amd64 go build \
+    && scp ${progname} tca-devops:/var/devops/phizz && \
+    rm ${progname}; \
+    cd $cwd
+}
+
+# Builds a stand-alone whiz command and copies it to /var/devops/whiz
+# on the AWS EC2 devops instance
+whiz_devops_deploy() {
+  cmd=$1
+  cwd=$(pwd)
+  progname=${cmd##*/}
+  cd cmd/${cmd}/ && \
+    GOOS=linux GOARCH=amd64 go build \
+    && scp ${progname} tca-devops:/var/devops/whiz && \
+    rm ${progname}; \
+    cd $cwd
+}
+
+#--------------------------------------------------------------------------------
+# Whiz and Phizz script variables
+#--------------------------------------------------------------------------------
+export WHIZ_LOG_FILE=/tmp/whiz.log
+export PHIZZ_LOG_FILE=/tmp/phizz.log
+
+#--------------------------------------------------------------------------------
+# Other
+#--------------------------------------------------------------------------------
+# Open file limit
+ulimit -S -n 200000
+ulimit -S -u 2048
+
+# If we have a glob this will expand it
+setopt GLOB_COMPLETE
+# Be Reasonable!
+setopt NUMERIC_GLOB_SORT
+
+# colors
+export CLICOLOR=1
+export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Don't allow husky to auto install git hooks
+HUSKY_SKIP_INSTALL=1
+
+#--------------------------------------------------------------------------------
+# Go
+#--------------------------------------------------------------------------------
+
+export GOPATH=$HOME/go
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+
+
+#--------------------------------------------------------------------------------
+# Homebrew
+#--------------------------------------------------------------------------------
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+
+#--------------------------------------------------------------------------------
+# Python 3
+#--------------------------------------------------------------------------------
+# Not needed with pyenv
+export PATH=/usr/local/opt/python/libexec/bin:$PATH
+USER_BASE_PATH=$(python -m site --user-base)
+export PATH=$PATH:$USER_BASE_PATH/bin
+
+#--------------------------------------------------------------------------------
+# Python pyenv
+#--------------------------------------------------------------------------------
+if command -v pyenv 1>/dev/null 2>&1; then
+  # export PYENV_ROOT="$HOME/.pyenv"
+  # export PATH="$PYENV_ROOT/bin:$PATH"
+  # TODO: Try removing this once the pyenv oh-my-zsh plugin is updated
+  eval "$(pyenv init --path)"
+  eval "$(pyenv init -)"
+fi
+
+#--------------------------------------------------------------------------------
+# SSH
+#--------------------------------------------------------------------------------
+
+# Add my personal keys to ssh-agent if they have not already been added
+# Disabled because this was added to the Mac KeyChain with 'ssh-add -K'
+# [[ $(ssh-add -l | grep joypeterson) ]] || ssh-add
+
+# Start Dynamic proxy using ssh config entry
+function proxy-on() {
+  ssh \
+    -f \
+    -N \
+    -D 8157 \
+    -o "ControlMaster=auto" \
+    -o "ControlPath=~/.ssh/sockets/%C" \
+    $@
+
+  # Create an HTTP proxy tunnel using privoxy
+  sudo brew services start privoxy
+
+  # Configure the system proxy to use the proxy tunnel
+  sudo networksetup -setwebproxy Wi-Fi 127.0.0.1 8118
+  sudo networksetup -setwebproxystate Wi-Fi on
+
+  sudo networksetup -setsecurewebproxy Wi-Fi 127.0.0.1 8118
+  sudo networksetup -setsecurewebproxystate Wi-Fi on
+}
+
+# Check status of dynamic proxy
+function proxy-check() {
+  ssh \
+    -o "ControlMaster=auto" \
+    -o "ControlPath=~/.ssh/sockets/%C" \
+    -O check \
+    $@
+}
+
+# Exit dynamic proxy
+function proxy-off() {
+  # Disable the system proxy
+  sudo networksetup -setwebproxystate Wi-Fi off
+  sudo networksetup -setsecurewebproxystate Wi-Fi off
+
+  # Terminate the HTTP proxy tunnel
+  sudo brew services stop privoxy
+  
+  # Exit the SSH dynamic proxy
+  ssh \
+    -o "ControlMaster=auto" \
+    -o "ControlPath=~/.ssh/sockets/%C" \
+    -O exit \
+    $@
+}
+
+#--------------------------------------------------------------------------------
+# Ansible
+#--------------------------------------------------------------------------------
+
+# ansible-vault decrypt
+function avd() {
+  secret=$1
+  printf $secret | tr -d ' ' | ansible-vault decrypt | tail -n+1 && echo
+}
+
+# ansible-vault encrypt
+function ave() {
+  secret_name=$1
+  secret_value=$2
+  ansible-vault encrypt_string $secret_value --name $secret_name
+}
+
+#--------------------------------------------------------------------------------
+# Serverless
+#--------------------------------------------------------------------------------
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+
+# Deletes locally installed packages
+function pipclean() {
+  pip uninstall -y -r <(pip freeze --local)
+}
+
+# Removes __pycache__ and .pyc files
+function pyclean() {
+  python -Bc "import pathlib; [p.unlink() for p in pathlib.Path('.').rglob('*.py[co]')]"
+  python -Bc "import pathlib; [p.rmdir() for p in pathlib.Path('.').rglob('__pycache__')]"
+}
+
+# Disable the warning message that is displayed by Powerlevel10k
+# if there is output after the prompt preamble.  Initializing
+# direnv causes output and it is slow, so it reasonalbe to move that
+# configuration above the preamble.
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+#--------------------------------------------------------------------------------
+# direnv - https://direnv.net/
+#--------------------------------------------------------------------------------
+eval "$(direnv hook zsh)"
+
+#--------------------------------------------------------------------------------
+# Kubernetes
+#--------------------------------------------------------------------------------
+# Handled by zsh kubectl plugin
+# source <(kubectl completion zsh)
+
+#--------------------------------------------------------------------------------
+# Google Cloud
+#--------------------------------------------------------------------------------
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
