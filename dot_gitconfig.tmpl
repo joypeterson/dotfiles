@@ -2,12 +2,12 @@
 [user]
 # Please adapt and uncomment the following lines:
 	name = Joy Peterson
-	email = joy.peterson@tech9.com
+	email = {{ .email }}
 [core]
 	autocrlf = false
 	editor = code --new-window --wait
 	safecrlf = false
-	excludesfile = /Users/joypeterson/.gitignore_global
+	excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
 
 [color]
 	ui = true
@@ -107,6 +107,6 @@
 	# cmd = 'code' --diff --wait \"$LOCAL\" \"$REMOTE\"
 
 [commit]
-	template = /Users/joypeterson/.stCommitMsg
+	template = {{ .chezmoi.homeDir }}/.stCommitMsg
 [pull]
 	rebase = false
