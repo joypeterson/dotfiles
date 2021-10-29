@@ -1,7 +1,3 @@
-{{- if (eq .chezmoi.os "darwin") -}}
-#!/bin/bash
-
-brew bundle --no-lock --file=/dev/stdin <<EOF
 tap "aws/tap"
 tap "go-task/tap"
 tap "golangci/tap"
@@ -12,7 +8,6 @@ tap "homebrew/core"
 tap "homebrew/services"
 tap "maoueh/tap"
 brew "libyaml"
-brew "age"
 brew "ansible"
 brew "autoconf"
 brew "bitwarden-cli"
@@ -104,6 +99,12 @@ cask "ngrok"
 cask "session-manager-plugin"
 cask "visual-studio-code"
 cask "wkhtmltopdf"
-
-EOF
-{{ end -}}
+mas "Be Focused Pro", id: 961632517
+mas "Dato", id: 1470584107
+mas "iMovie", id: 408981434
+mas "Keynote", id: 409183694
+mas "Lightshot Screenshot", id: 526298438
+mas "Microsoft Remote Desktop", id: 1295203466
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Slack", id: 803453959

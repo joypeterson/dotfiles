@@ -1,6 +1,4 @@
-
-   
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Homebrew
 #
@@ -13,4 +11,4 @@ then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-exit 0
+brew install age
