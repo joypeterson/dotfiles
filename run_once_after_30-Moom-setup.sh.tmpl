@@ -1,2 +1,6 @@
+{{ if eq .chezmoi.os "darwin" -}}
 #!/bin/sh
+echo "Running run_once_after_30-Moom-setup.sh"
+
 defaults import com.manytricks.Moom {{ .chezmoi.sourceDir }}/moom.plist
+{{ end -}}

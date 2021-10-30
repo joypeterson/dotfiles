@@ -1,0 +1,7 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/sh
+# export Moom settings each time apply is run in case they have changed
+
+echo "Running run_after_40-Moom-export-setup.sh"
+defaults export com.manytricks.Moom {{ .chezmoi.sourceDir }}/moom.plist
+{{ end -}}
