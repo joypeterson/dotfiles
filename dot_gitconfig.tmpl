@@ -107,6 +107,8 @@
 	# cmd = 'code' --diff --wait \"$LOCAL\" \"$REMOTE\"
 
 [commit]
-	template = {{ .chezmoi.homeDir }}/.stCommitMsg
+	# template = {{ .chezmoi.homeDir }}/.stCommitMsg
 [pull]
 	rebase = false
+[submodule]
+	recurse = true
