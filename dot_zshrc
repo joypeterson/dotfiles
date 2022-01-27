@@ -93,7 +93,7 @@ plugins=(
   # pyenv
   vscode
   yarn
-  zsh-autocomplete
+  # zsh-autocomplete
 )
 
 source $ZSH/oh-my-zsh.sh
