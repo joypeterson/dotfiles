@@ -89,10 +89,11 @@ plugins=(
   golang
   history-substring-search
   kubectl
-  osx
+  macos
   # pyenv
   vscode
   yarn
+  zsh-autocomplete
 )
 
 source $ZSH/oh-my-zsh.sh
